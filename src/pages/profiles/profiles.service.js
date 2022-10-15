@@ -3,6 +3,14 @@ class ProfilesService {
     // TODO: temp data
     return [
       {
+        key: 0,
+        id: "Example 0",
+        resume:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        name: "MyName0",
+        dni: "12345678A",
+      },
+      {
         key: 1,
         id: "Example 1",
         resume:
