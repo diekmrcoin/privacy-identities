@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      aboutMeEventName: "showAboutMe",
+      aboutMeEventName: "App.event.showAboutMe",
     };
   }
   handleShowAboutMe() {

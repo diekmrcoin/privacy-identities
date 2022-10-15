@@ -8,13 +8,10 @@ import EventService from "../../services/event.service";
 class Nav extends React.Component {
   constructor(props) {
     super(props);
-    this.toastEvent = "nav.event.showToast";
-  }
-  componentDidMount() {
-    this.event = EventService.create(this.toastEvent);
+    this.toastEvent = "Nav.event.showToast";
   }
   showToast() {
-    EventService.publish(this.event);
+    EventService.publish(this.toastEvent);
   }
   render() {
     return (

@@ -14,6 +14,9 @@ class Toast extends React.Component {
       this.setState({ show: true });
     });
   }
+  componentWillUnmount() {
+    EventService.unsubscribe(this.props.eventName);
+  }
   close() {
     this.setState({ show: false });
   }
