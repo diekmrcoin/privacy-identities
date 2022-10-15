@@ -1,11 +1,26 @@
 .App {
-  margin-top: 1em;
+  padding-top: 1em;
 }
 
-.new-element {
-  position: absolute;
-  bottom: 1em;
-  right: 1em;
+.App-header {
+  min-height: 10vh;
+}
+
+.App-body {
+  min-height: 90vh;
+}
+
+a:link {
+  color: #084298;
+}
+a:visited {
+  color: #5885af;
+}
+a:hover {
+  color: #41729f;
+}
+a:active {
+  color: #274472;
 }
 
 .App-logo {
@@ -17,21 +32,6 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {

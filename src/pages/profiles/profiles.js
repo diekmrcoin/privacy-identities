@@ -1,4 +1,5 @@
 import React from "react";
+import "./profiles.css";
 import ProfilesService from "./profiles.service";
 import Accordion from "react-bootstrap/Accordion";
 
@@ -16,7 +17,7 @@ class Profiles extends React.Component {
   render() {
     // TODO: display a quick resume of the data for each profile
     return (
-      <div>
+      <div className="profile-list">
         <Accordion defaultActiveKey="0">
           {this.state.profiles.map((v) => (
             <Accordion.Item eventKey={v.key.toString()} key={v.key}>

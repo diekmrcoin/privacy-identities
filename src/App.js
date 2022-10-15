@@ -3,10 +3,9 @@ import "./App.css";
 import Profiles from "./pages/profiles/profiles";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import AboutMe from "./pages/about-me/about-me";
-import { publish } from "./services/event.service";
-import { FaUserPlus } from "react-icons/fa";
-
+import AboutMe from "./components/about-me/about-me";
+import EventService from "./services/event.service";
+import Nav from "./components/nav/nav";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -15,30 +14,30 @@ class App extends React.Component {
     };
   }
   handleShowAboutMe() {
-    publish(this.state.aboutMeEventName);
+    EventService.publish(this.state.aboutMeEventName);
   }
   render() {
     return (
       <div className="App">
         <Container>
-          <h1>Privacy tools</h1>
-          <p>
-            <Button
-              variant="outline-primary"
-              size="sm"
-              onClick={this.handleShowAboutMe.bind(this)}
-            >
-              Saber más
-            </Button>
-          </p>
-          <Profiles />
+          <div className="App-header">
+            <h1>Privacy tools</h1>
+            <p>
+              <Button
+                variant="outline-primary"
+                size="sm"
+                onClick={this.handleShowAboutMe.bind(this)}
+              >
+                Saber más
+              </Button>
+            </p>
+          </div>
+          <div className="App-body">
+            <Profiles />
+          </div>
         </Container>
         <AboutMe aboutMeEventName={this.state.aboutMeEventName} />
-        <div className="new-element">
-          <Button size="lg">
-            <FaUserPlus />
-          </Button>
-        </div>
+        <Nav />
       </div>
     );
   }

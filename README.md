@@ -25,3 +25,17 @@ Objetivos:
 - [-] Almacenamiento remoto con conocimiento cero
 - [-] Docker y self-hosted
 - [-] Terraform y serverless
+
+### Webapp color palette
+
+- Bootstrap default colors
+- Bootstrap dark blue
+  - #084298
+- Midnight Blue [Palette example](https://www.canva.com/colors/color-palettes/window-tide/)
+  - #41729F
+- Blue Gray
+  - #5885AF
+- Dark Blue
+  - #274472
+- Baby Blue
+  - #C3E0E5

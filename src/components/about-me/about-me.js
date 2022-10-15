@@ -1,7 +1,7 @@
 import React from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Alert from "react-bootstrap/Alert";
-import { subscribe, unsubscribe } from "../../services/event.service";
+import EventService from "../../services/event.service";
 
 class AboutMe extends React.Component {
   constructor(props) {
@@ -9,12 +9,12 @@ class AboutMe extends React.Component {
     this.state = { show: false };
   }
   componentDidMount() {
-    subscribe(this.props.aboutMeEventName, () => {
+    EventService.subscribe(this.props.aboutMeEventName, () => {
       this.setState({ show: true });
     });
   }
   componentWillUnmount() {
-    unsubscribe(this.props.aboutMeEventName);
+    EventService.unsubscribe(this.props.aboutMeEventName);
   }
   handleClose() {
     this.setState({ show: false });
