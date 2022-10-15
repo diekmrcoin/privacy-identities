@@ -8,7 +8,7 @@ class ProfilesService {
         id: `Example ${i}`,
         resume:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        name: "MyName0",
+        name: `MyName${i}`,
         dni: "12345678A",
       });
     }

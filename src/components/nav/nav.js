@@ -1,7 +1,8 @@
 import React from "react";
-import "./nav.css";
 import Button from "react-bootstrap/Button";
-import { FaUserPlus, FaCloudUploadAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaUserPlus, FaCloudUploadAlt, FaList, FaHome } from "react-icons/fa";
+import "./nav.css";
 import Toast from "../toast/toast";
 import EventService from "../../services/event.service";
 
@@ -15,12 +16,24 @@ class Nav extends React.Component {
   }
   render() {
     return (
-      <div className="root">
+      <div className="nav-root">
+        <Button size="lg">
+          <Link to="/">
+            <FaHome />
+          </Link>
+        </Button>
+        <Button size="lg">
+          <Link to="/profiles">
+            <FaList />
+          </Link>
+        </Button>
         <Button size="lg" onClick={this.showToast.bind(this)}>
           <FaCloudUploadAlt />
         </Button>
         <Button size="lg">
-          <FaUserPlus />
+          <Link to="/profile">
+            <FaUserPlus />
+          </Link>
         </Button>
         <Toast eventName={this.toastEvent} />
       </div>

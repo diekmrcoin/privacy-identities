@@ -1,4 +1,4 @@
-.root {
+.nav-root {
   position: sticky;
   right: 1em;
   bottom: 0;
@@ -7,14 +7,27 @@
   text-align: right;
 }
 
-.root > button {
+.nav-root > button {
   margin: 0 0.5em;
 }
 
-.root > button:first-of-type {
+.nav-root > button:first-of-type {
   margin-left: 0;
 }
 
-.root > button:last-of-type {
+.nav-root > button:last-of-type {
   margin-right: 0;
+}
+
+button > a:link {
+  color: #fff;
+}
+button > a:visited {
+  color: #fff;
+}
+button > a:hover {
+  color: #fff;
+}
+button > a:active {
+  color: #fff;
 }

@@ -1,45 +1,23 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Layout from "./pages/layout/layout";
+import Home from "./pages/home/home";
 import Profiles from "./pages/profiles/profiles";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import AboutMe from "./components/about-me/about-me";
-import EventService from "./services/event.service";
-import Nav from "./components/nav/nav";
+import Profile from "./pages/profile/profile";
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      aboutMeEventName: "App.event.showAboutMe",
-    };
-  }
-  handleShowAboutMe() {
-    EventService.publish(this.state.aboutMeEventName);
-  }
   render() {
-    // TODO: Router on the container tag
     return (
-      <div className="App">
-        <Container>
-          <div className="App-header">
-            <h1>Privacy tools</h1>
-            <p>
-              <Button
-                variant="outline-primary"
-                size="sm"
-                onClick={this.handleShowAboutMe.bind(this)}
-              >
-                Saber más
-              </Button>
-            </p>
-          </div>
-          <div className="App-body">
-            <Profiles />
-          </div>
-        </Container>
-        <AboutMe aboutMeEventName={this.state.aboutMeEventName} />
-        <Nav />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="profiles" element={<Profiles />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="profile/:id" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     );
   }
 }

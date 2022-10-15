@@ -29,6 +29,8 @@ Objetivos:
 ### Webapp color palette
 
 - Bootstrap default colors
+- Bootstrap primary
+  - #0d6efd
 - Bootstrap dark blue
   - #084298
 - Midnight Blue [Palette example](https://www.canva.com/colors/color-palettes/window-tide/)
