@@ -1,17 +1,17 @@
 /**
  * @param {string} eventName
- * @param {EventListener} listener
+ * @param {(data:any)=>void} listener
  */
 function subscribe(eventName, listener) {
-  document.addEventListener(eventName, listener);
+  document.addEventListener(eventName, (event) => listener(event.detail));
 }
 
 /**
  * @param {string} eventName
- * @param {EventListener} listener
+ * @param {(data:any)=>void} listener
  */
 function unsubscribe(eventName, listener) {
-  document.removeEventListener(eventName, listener);
+  document.removeEventListener(eventName, (event) => listener(event.detail));
 }
 
 /**
@@ -23,12 +23,4 @@ function publish(eventName, data) {
   document.dispatchEvent(event);
 }
 
-/**
- * @param {CustomEvent} event
- * @returns {any}
- */
-function eventData(event) {
-  return event.detail;
-}
-
-export { publish, subscribe, unsubscribe, eventData };
+export { publish, subscribe, unsubscribe };
