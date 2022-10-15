@@ -26,9 +26,12 @@ class AboutMe extends React.Component {
           <Offcanvas.Title>Información</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <p>Ésta webapp no usa cookies ni ningún tipo de seguimiento.</p>
+          <Alert variant="primary">
+            Ésta webapp no usa cookies ni realiza ningún tipo de seguimiento.
+          </Alert>
+          <p>El diseño de ésta webapp es mobile first.</p>
           <p>
-            Se almacenan los datos en local usando la tecnología IndexedDB del
+            Los datos se almacenan en local usando la tecnología IndexedDB del
             navegador.
             <br />
             <a

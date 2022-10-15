@@ -2,6 +2,12 @@
   margin-top: 1em;
 }
 
+.new-element {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
