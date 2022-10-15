@@ -17,6 +17,7 @@ class App extends React.Component {
     EventService.publish(this.state.aboutMeEventName);
   }
   render() {
+    // TODO: Router on the container tag
     return (
       <div className="App">
         <Container>
