@@ -26,6 +26,15 @@ Objetivos:
 - [-] Docker y self-hosted
 - [-] Terraform y serverless
 
+### Frontend infrastructure
+
+AWS:
+
+- Cloudfront
+  - No cache for the first versions
+- S3
+  - Static storage
+
 ### Webapp color palette
 
 - Bootstrap default colors
