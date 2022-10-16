@@ -1,4 +1,4 @@
-import { get, set } from "idb-keyval";
+import { get, set, entries } from "idb-keyval";
 
 class StorageService {
   /**
@@ -16,6 +16,20 @@ class StorageService {
    */
   async set(key, value) {
     return set(key, value);
+  }
+
+  async getAll() {
+    return entries();
+  }
+
+  async getAllProfiles() {
+    return (await entries())
+      .filter((o) => o[0].startsWith("profile"))
+      .map((o) => o[1]);
+  }
+
+  async countProfiles() {
+    return (await this.getAllProfiles()).length;
   }
 }
 

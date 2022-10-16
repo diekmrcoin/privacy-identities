@@ -14,11 +14,25 @@ class Profiles extends React.Component {
   }
   componentDidMount() {
     this.service.getAll().then((data) => {
+      console.log(data);
       this.setState({ profiles: data });
     });
   }
   render() {
-    // TODO: display a quick resume of the data for each profile
+    if (this.state.profiles.length) return this.renderData();
+    return this.renderEmpty();
+  }
+
+  renderEmpty() {
+    return (
+      <div>
+        <h3>No hay datos.</h3>
+        <p>Añade tu primer perfil.</p>
+      </div>
+    );
+  }
+
+  renderData() {
     return (
       <div className="profile-list">
         <Accordion defaultActiveKey="-1">
