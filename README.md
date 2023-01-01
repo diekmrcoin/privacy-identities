@@ -12,16 +12,16 @@ Ejemplos:
 Objetivos:
 
 - [**x**] FOSS
-- [-] Crear identidad con la estructura:
+- [**X**] Crear identidad con la estructura:
   - Identificador
   - Resumen
   - Nombre
   - Dni
 - [**x**] Listado de identidades
-- [-] Al crear identidad se debe poder:
+- [**X**] Al crear identidad se debe poder:
   - Generar dni aleatoriamente
-  - Posibilidad de decidir primer número del dni a generar
-  - Posibilidad de decidir letra del dni a generar
+  - Posibilidad de decidir prefijo del dni a generar (sólo en código, no en UX)
+- [**X**] Almacenamiento local en IndexedDB
 - [-] Almacenamiento remoto con conocimiento cero
 - [-] Docker y self-hosted
 - [-] Terraform y serverless

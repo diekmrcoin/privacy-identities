@@ -1,10 +1,11 @@
 class Profile {
   constructor() {
-    this.key = null;
-    this.id = null;
-    this.resume = null;
-    this.name = null;
-    this.dni = null;
+    this.key = "";
+    this.id = "";
+    this.resume = "";
+    this.name = "";
+    this.dni = "";
+    this.createdAt = new Date();
   }
   static copy(o) {
     const p = new Profile();

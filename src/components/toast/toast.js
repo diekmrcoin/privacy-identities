@@ -8,6 +8,11 @@ class Toast extends React.Component {
   constructor(props) {
     super(props);
     this.state = { show: false };
+    this.title = this.props.title;
+    this.subtitle = this.props.subtitle || "";
+    this.body = this.props.body;
+    this.position = this.props.position || "bottom-center";
+    this.delay = this.props.delay || 3000;
   }
   componentDidMount() {
     EventService.subscribe(this.props.eventName, () => {
@@ -22,21 +27,19 @@ class Toast extends React.Component {
   }
   render() {
     return (
-      <ToastContainer className="p-3" position="bottom-center">
+      <ToastContainer className="p-3" position={this.position}>
         <BToast
           show={this.state.show}
           onClose={this.close.bind(this)}
-          delay={3000}
+          delay={this.delay}
           autohide
         >
           <BToast.Header>
             <FaExclamationTriangle />{" "}
-            <strong className="me-auto">Oh no!</strong>
-            <small>Just now</small>
+            <strong className="me-auto">{this.title}</strong>
+            <small>{this.subtitle}</small>
           </BToast.Header>
-          <BToast.Body>
-            El guardado en la nube llegará más adelante.
-          </BToast.Body>
+          <BToast.Body>{this.body}</BToast.Body>
         </BToast>
       </ToastContainer>
     );

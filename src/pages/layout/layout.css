@@ -1,3 +1,21 @@
-.App {
-  padding-top: 1em;
+.app-title {
+  margin-top: 1em;
+}
+
+.home-header {
+  height: 15vh;
+}
+
+/**
+ * This is the main content area of the page.
+ * It should be scrollable.
+ * max-height is the height of the viewport minus:
+  *  - the height of the header
+  *  - the height of the sticky nav
+  *  - the height of the top margin
+  *  - the height of the bottom margin
+ */
+.home-body {
+  max-height: calc(100vh - 15vh - 3em - 1em - 1em);
+  overflow: scroll;
 }

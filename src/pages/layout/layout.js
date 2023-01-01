@@ -20,10 +20,11 @@ class Layout extends React.Component {
   render() {
     return (
       <div className="App">
-        <Container>
+        <Nav />
+        <Container className="content">
           <div>
             <div className="home-header">
-              <h1>Privacy tools</h1>
+              <h1 className="app-title">Privacy tools</h1>
               <p>
                 <Button
                   variant="outline-primary"
@@ -41,7 +42,6 @@ class Layout extends React.Component {
           </div>
         </Container>
         <AboutMe aboutMeEventName={this.state.aboutMeEventName} />
-        <Nav />
       </div>
     );
   }
