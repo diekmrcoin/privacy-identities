@@ -2,14 +2,14 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { FaRandom, FaSave } from "react-icons/fa";
+import { FaRandom, FaSave, FaTrash } from "react-icons/fa";
 import ProfileService from "./profile.service";
 import Toast from "../../components/toast/toast";
-import EventService from "../../services/event.service";
 import Profile from "../../classes/profile";
 import RandomDni from "../../services/random-dni";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./profile.css";
+import { Row, Col, Container } from "react-bootstrap";
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -25,6 +25,7 @@ class ProfilePage extends React.Component {
     this.toastUpdateProfile = "Profile.event.updateProfile";
     this.toastDelay = 3000;
   }
+
   componentDidMount() {
     const id = this.props.params.id;
     this.setState({ id });
@@ -58,22 +59,21 @@ class ProfilePage extends React.Component {
       this.saving = false;
       return;
     }
-    EventService.publish(this.toastNewProfile);
-    // TODO: navigate when toast is closed
-    setTimeout(() => {
-      this.navigate("/profiles");
-      this.saving = false;
-    }, this.toastDelay);
+    this.navigate("/profiles");
+    this.saving = false;
   }
 
   async update(event) {
+    this.saving = true;
     event.preventDefault();
     const saved = await this.service.update(this.state.form, this.state.id);
     if (!saved) {
       console.log("Error guardando");
+      this.saving = false;
       return;
     }
     this.navigate("/profiles");
+    this.saving = false;
   }
 
   randomDni() {
@@ -88,11 +88,80 @@ class ProfilePage extends React.Component {
     if (this.state.id) return this.renderDetail();
     return this.renderCreate();
   }
+
+  renderCreate() {
+    return (
+      <div>
+        <Form onSubmit={this.save}>
+          <Form.Group className="mb-3" controlId="form.identificator">
+            <Form.Label>Identificador</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="identificador cualquiera"
+              onChange={this.changeForm("id")}
+              value={this.state.form.id}
+            />
+            <Form.Text className="text-muted">
+              Para identificar el perfil en el listado
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="form.resume">
+            <Form.Label>Resumen del perfil</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              onChange={this.changeForm("resume")}
+              value={this.state.form.resume}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="form.name">
+            <Form.Label>Nombre y apellidos</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="ADAM ANDRES BELTRAN"
+              onChange={this.changeForm("name")}
+              value={this.state.form.name}
+            />
+            <Form.Text className="text-muted">
+              Nombre con el que te has identificado en el servicio
+            </Form.Text>
+          </Form.Group>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="00000000A"
+              onChange={this.changeForm("dni")}
+              value={this.state.form.dni}
+            />
+            <InputGroup.Text id="random_dni" onClick={this.randomDni}>
+              <FaRandom />
+            </InputGroup.Text>
+          </InputGroup>
+          <Container>
+            <Row>
+              <Col>
+                <Button variant="primary" type="submit">
+                  Crear <FaSave />
+                </Button>
+              </Col>
+            </Row>
+          </Container>
+        </Form>
+        <Toast
+          eventName={this.toastNewProfile}
+          title="Guardando"
+          body="El perfil se está almacenando"
+          delay={this.toastDelay}
+        />
+      </div>
+    );
+  }
+
   renderDetail() {
     return (
       <div>
         <h1>{this.state.form.name}</h1>
-        <Form onSubmit={this.save}>
+        <Form onSubmit={this.update}>
           <Form.Group className="mb-3" controlId="form.identificator">
             <Form.Label>Identificador</Form.Label>
             <Form.Control
@@ -137,71 +206,20 @@ class ProfilePage extends React.Component {
               <FaRandom />
             </InputGroup.Text>
           </InputGroup>
-          <Button variant="primary" type="submit">
-            Guardar <FaSave />
-          </Button>
-        </Form>
-        <Toast
-          eventName={this.toastNewProfile}
-          title="Guardando"
-          body="El perfil se está almacenando"
-          delay={this.toastDelay}
-        />
-      </div>
-    );
-  }
-  renderCreate() {
-    return (
-      <div>
-        <Form onSubmit={this.save}>
-          <Form.Group className="mb-3" controlId="form.identificator">
-            <Form.Label>Identificador</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="identificador cualquiera"
-              onChange={this.changeForm("id")}
-              value={this.state.form.id}
-            />
-            <Form.Text className="text-muted">
-              Para identificar el perfil en el listado
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="form.resume">
-            <Form.Label>Resumen del perfil</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              onChange={this.changeForm("resume")}
-              value={this.state.form.resume}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="form.name">
-            <Form.Label>Nombre y apellidos</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="ADAM ANDRES BELTRAN"
-              onChange={this.changeForm("name")}
-              value={this.state.form.name}
-            />
-            <Form.Text className="text-muted">
-              Nombre con el que te has identificado en el servicio
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="form.dni">
-            <Form.Label>DNI</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="19754004V"
-              onChange={this.changeForm("dni")}
-              value={this.state.form.dni}
-            />
-          </Form.Group>
-          <Button variant="primary" onClick={this.randomDni}>
-            <FaRandom />
-          </Button>
-          <Button variant="primary" type="submit">
-            Guardar <FaSave />
-          </Button>
+          <Container>
+            <Row>
+              <Col>
+                <Button variant="primary" type="submit">
+                  Guardar <FaSave />
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="danger" onClick={this.delete}>
+                  Eliminar <FaTrash />
+                </Button>
+              </Col>
+            </Row>
+          </Container>
         </Form>
         <Toast
           eventName={this.toastNewProfile}

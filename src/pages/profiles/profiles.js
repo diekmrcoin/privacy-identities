@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import "./profiles.css";
 import ProfilesService from "./profiles.service";
 import { FaPencilAlt } from "react-icons/fa";
+import { Col, Row } from "react-bootstrap";
 
 class Profiles extends React.Component {
   constructor(props) {
@@ -39,18 +40,24 @@ class Profiles extends React.Component {
             <Accordion.Item eventKey={v.key.toString()} key={v.key}>
               <Accordion.Header>{v.id}</Accordion.Header>
               <Accordion.Body>
-                <p className="edit-profile">
-                  {v.name} {v.dni}
-                  <Link to={"/profile/" + v.key}>
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      className="edit-profile-button"
-                    >
-                      <FaPencilAlt color="white" />
-                    </Button>{" "}
-                  </Link>
-                </p>
+                <Row>
+                  <Col xs={10}>
+                    <p className="edit-profile">
+                      {v.name} {v.dni}
+                    </p>
+                  </Col>
+                  <Col xs={2}>
+                    <Link to={"/profile/" + v.key}>
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        className="edit-profile-button"
+                      >
+                        <FaPencilAlt color="white" />
+                      </Button>{" "}
+                    </Link>
+                  </Col>
+                </Row>
                 <hr />
                 <p>{v.resume}</p>
               </Accordion.Body>
