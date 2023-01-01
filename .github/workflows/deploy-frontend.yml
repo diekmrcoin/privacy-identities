@@ -1,6 +1,7 @@
 name: "Deploy frontend"
 
 on:
+  workflow_dispatch:
   push:
     branches: ["main"]
 
@@ -31,7 +32,7 @@ jobs:
         with:
           node-version: "16"
           cache: "yarn"
-      - run: yarn install
+      - run: yarn install --pure-lockfiles
       - run: yarn build
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1

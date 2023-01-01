@@ -1,0 +1,25 @@
+name: "Deploy frontend"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  BUCKET_NAME: "diekmrcoin-privacy-tools-frontend"
+  AWS_REGION: "eu-west-3"
+
+jobs:
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{secrets.ROLE_ARN}}
+          role-session-name: diekmrcoin-privacy-tools-deploy
+          aws-region: ${{ env.AWS_REGION }}
