@@ -16,6 +16,7 @@ class ProfileService {
   }
 
   /**
+   * @param {Profile} data
    * @return {Promise<Profile>}
    */
   async save(data) {
@@ -26,12 +27,22 @@ class ProfileService {
   }
 
   /**
+   * @param {Profile} data
+   * @param {string} id
    * @return {Promise<Profile>}
    */
   async update(data, id) {
     const profile = Profile.copy({ ...data, key: id });
     await this.db.set(`profile.${id}`, profile);
     return profile;
+  }
+
+  /**
+   * @param {string} id
+   * @return {Promise<boolean>}
+   */
+  async delete(id) {
+    return this.db.delete(`profile.${id}`);
   }
 }
 

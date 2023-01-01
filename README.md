@@ -9,31 +9,40 @@ Ejemplos:
 - La identidad que le dices al repartidor para recoger un paquete en la puerta de tu casa.
 - La identidad que proporcionas para registrarte en un servicio que no tiene KYC y no vas a facturar.
 
-Objetivos:
+## Funcionalidades:
 
-- [**x**] FOSS
+- [**X**] FOSS
 - [**X**] Crear identidad con la estructura:
   - Identificador
   - Resumen
   - Nombre
   - Dni
-- [**x**] Listado de identidades
+- [**X**] Listado de identidades
 - [**X**] Al crear identidad se debe poder:
   - Generar dni aleatoriamente
   - Posibilidad de decidir prefijo del dni a generar (sólo en código, no en UX)
 - [**X**] Almacenamiento local en IndexedDB
+- [**X**] Editar identidad
+- [**X**] Eliminar identidad
+- [**X**] PWA
+- [**X**] AWS + Terraform
+  - [**X**] S3 almacenamiento estático
+  - [**X**] Cloudfront CDN
+- [**X**] CI/CD
+
+## TODO:
+
+- [-] Crear y detalle como componentes diferentes
+- [-] Exportar identidad
+- [-] Ordenar identidades por nombre y fecha de creación
 - [-] Almacenamiento remoto con conocimiento cero
 - [-] Docker y self-hosted
-- [-] Terraform y serverless
-
-### Frontend infrastructure
-
-AWS:
-
-- Cloudfront
-  - No cache for the first versions
-- S3
-  - Static storage
+- [-] AWS + Terraform
+  - [-] Route53 `privacytoos.diekmrcoin.com`
+  - [-] ACM cert
+  - [-] Lambda backend
+  - [-] API Gateway
+  - [-] DynamoDB backend
 
 ### Webapp color palette
 

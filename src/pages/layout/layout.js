@@ -6,6 +6,7 @@ import "./layout.css";
 import EventService from "../../services/event.service";
 import Nav from "../../components/nav/nav";
 import AboutMe from "../../components/about-me/about-me";
+import { Col, Row } from "react-bootstrap";
 
 class Layout extends React.Component {
   constructor(props) {
@@ -24,16 +25,23 @@ class Layout extends React.Component {
         <Container className="content">
           <div>
             <div className="home-header">
-              <h1 className="app-title">Privacy tools</h1>
-              <p>
-                <Button
-                  variant="outline-primary"
-                  size="sm"
-                  onClick={this.handleShowAboutMe.bind(this)}
-                >
-                  Saber más
-                </Button>
-              </p>
+              <Container className="app-title">
+                <Row>
+                  <Col xs={8}>
+                    <h1>Privacy tools</h1>
+                  </Col>
+                  <Col xs={4}>
+                    <Button
+                      className="about-me-button"
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={this.handleShowAboutMe.bind(this)}
+                    >
+                      Saber más
+                    </Button>
+                  </Col>
+                </Row>
+              </Container>
               <hr />
             </div>
             <div className="home-body">

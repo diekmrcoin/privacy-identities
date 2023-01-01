@@ -1,4 +1,4 @@
-import { get, set, entries } from "idb-keyval";
+import { get, set, entries, del } from "idb-keyval";
 
 class StorageService {
   /**
@@ -16,6 +16,15 @@ class StorageService {
    */
   async set(key, value) {
     return set(key, value);
+  }
+
+  /**
+   * @param {string} key
+   * @returns {Promise<boolean>}
+   */
+  async delete(key) {
+    await del(key);
+    return !(await this.get(key));
   }
 
   async getAll() {

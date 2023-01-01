@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaRandom, FaSave, FaTrash } from "react-icons/fa";
 import ProfileService from "./profile.service";
-import Toast from "../../components/toast/toast";
 import Profile from "../../classes/profile";
 import RandomDni from "../../services/random-dni";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -19,11 +18,10 @@ class ProfilePage extends React.Component {
     this.state = { id: undefined, form: new Profile() };
     this.saving = false;
     this.save = this.save.bind(this);
+    this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
     this.changeForm = this.changeForm.bind(this);
     this.randomDni = this.randomDni.bind(this);
-    this.toastNewProfile = "Profile.event.newProfile";
-    this.toastUpdateProfile = "Profile.event.updateProfile";
-    this.toastDelay = 3000;
   }
 
   componentDidMount() {
@@ -55,7 +53,7 @@ class ProfilePage extends React.Component {
     event.preventDefault();
     const saved = await this.service.save(this.state.form);
     if (!saved) {
-      console.log("Error guardando");
+      console.log("Error creando");
       this.saving = false;
       return;
     }
@@ -68,7 +66,19 @@ class ProfilePage extends React.Component {
     event.preventDefault();
     const saved = await this.service.update(this.state.form, this.state.id);
     if (!saved) {
-      console.log("Error guardando");
+      console.log("Error actualizando");
+      this.saving = false;
+      return;
+    }
+    this.navigate("/profiles");
+    this.saving = false;
+  }
+
+  async delete() {
+    this.saving = true;
+    const saved = await this.service.delete(this.state.id);
+    if (!saved) {
+      console.log("Error borrando");
       this.saving = false;
       return;
     }
@@ -92,6 +102,7 @@ class ProfilePage extends React.Component {
   renderCreate() {
     return (
       <div>
+        <h1>Creando</h1>
         <Form onSubmit={this.save}>
           <Form.Group className="mb-3" controlId="form.identificator">
             <Form.Label>Identificador</Form.Label>
@@ -147,12 +158,6 @@ class ProfilePage extends React.Component {
             </Row>
           </Container>
         </Form>
-        <Toast
-          eventName={this.toastNewProfile}
-          title="Guardando"
-          body="El perfil se está almacenando"
-          delay={this.toastDelay}
-        />
       </div>
     );
   }
@@ -221,12 +226,6 @@ class ProfilePage extends React.Component {
             </Row>
           </Container>
         </Form>
-        <Toast
-          eventName={this.toastNewProfile}
-          title="Guardando"
-          body="El perfil se está almacenando"
-          delay={this.toastDelay}
-        />
       </div>
     );
   }
