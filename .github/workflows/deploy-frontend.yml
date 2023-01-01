@@ -1,4 +1,4 @@
-name: "Deploy"
+name: "Deploy frontend"
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
   AWS_REGION: "eu-west-3"
 
 jobs:
-  deploy_s3:
+  deploy-frontend:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
@@ -25,7 +25,7 @@ jobs:
       - name: set env params for the build
         id: write_env
         run: |
-          echo "version=${{ steps.short_commit_id.outputs.SHORT_COMMIT_ID }}"" >> ./env
+          echo "version=${{ steps.short_commit_id.outputs.SHORT_COMMIT_ID }}" >> ./env
           echo "env=prod" >> ./env
       - uses: actions/setup-node@v3
         with:
