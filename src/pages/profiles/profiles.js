@@ -14,7 +14,6 @@ class Profiles extends React.Component {
   }
   componentDidMount() {
     this.service.getAll().then((data) => {
-      console.log(data);
       this.setState({ profiles: data });
     });
   }

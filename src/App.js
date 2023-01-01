@@ -6,6 +6,9 @@ import Home from "./pages/home/home";
 import Profiles from "./pages/profiles/profiles";
 import Profile from "./pages/profile/profile";
 class App extends React.Component {
+  componentDidMount() {
+    console.log("Running env:", process.env.REACT_APP_ENV);
+  }
   render() {
     return (
       <BrowserRouter>

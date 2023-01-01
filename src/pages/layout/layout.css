@@ -17,5 +17,5 @@
  */
 .home-body {
   max-height: calc(100vh - 15vh - 3em - 1em - 1em);
-  overflow: scroll;
+  overflow-y: scroll;
 }
