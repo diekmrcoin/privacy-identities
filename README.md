@@ -38,7 +38,7 @@ Ejemplos:
 - [-] Almacenamiento remoto con conocimiento cero
 - [-] Docker y self-hosted
 - [-] AWS + Terraform
-  - [-] Route53 `privacytoos.diekmrcoin.com`
+  - [-] Route53 `privacytools.diekmrcoin.com`
   - [-] ACM cert
   - [-] Lambda backend
   - [-] API Gateway
