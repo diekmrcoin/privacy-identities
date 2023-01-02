@@ -25,9 +25,11 @@ provider "aws" {
 
 locals {
   name = "diekmrcoin-privacy-tools"
+  route53_zone = "Z0542950XRQYAFZ1ZBXF"
 }
 
 module "frontend" {
   source = "./frontend"
   name   = "${local.name}-frontend"
+  route53_zone = local.route53_zone
 }

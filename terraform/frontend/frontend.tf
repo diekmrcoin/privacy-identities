@@ -1,4 +1,5 @@
 variable "name" { type = string }
+variable "route53_zone" { type = string }
 
 module "cloudfront_access_identity" {
   source = "../modules/origin-access-identity"
@@ -62,4 +63,12 @@ module "cloudfront" {
   origin_access_identity = {
     cloudfront_access_identity_path = module.cloudfront_access_identity.cloudfront_access_identity_path
   }
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = var.route53_zone
+  name    = "privacytools.diekmrcoin.com"
+  type    = "CNAME"
+  ttl     = 300
+  records = [module.cloudfront.domain_name]
 }
