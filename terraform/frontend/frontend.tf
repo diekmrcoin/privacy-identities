@@ -36,8 +36,30 @@ resource "aws_cloudfront_cache_policy" "default" {
   }
 }
 
+resource "aws_cloudfront_cache_policy" "summarized_static" {
+  name        = "${var.name}-summarized-static-cache-policy"
+  comment     = "Summarized static files policy for ${var.name} frontend"
+  default_ttl = 259200 # 72 hours
+  max_ttl     = 518400 # 144 hours
+  min_ttl     = 3600   # 1 hour
+  parameters_in_cache_key_and_forwarded_to_origin {
+    cookies_config {
+      cookie_behavior = "all"
+    }
+    headers_config {
+      header_behavior = "whitelist"
+      headers {
+        items = ["Authorization"]
+      }
+    }
+    query_strings_config {
+      query_string_behavior = "all"
+    }
+  }
+}
+
 provider "aws" {
-  alias = "us_east_1"
+  alias  = "us_east_1"
   region = "us-east-1"
   default_tags {
     tags = {
@@ -67,7 +89,17 @@ module "cloudfront" {
     function_association        = []
     lambda_function_association = []
   }
-  ordered_cache_behavior = []
+  ordered_cache_behavior = [
+    {
+      allowed_methods             = ["GET", "HEAD", "OPTIONS"]
+      cache_policy_id             = aws_cloudfront_cache_policy.summarized_static.id
+      origin_request_policy_id    = null
+      path_pattern                = "/static/*"
+      target_origin_id            = module.bucket.id
+      function_association        = []
+      lambda_function_association = []
+    }
+  ]
   error_response = {
     response_code      = 200
     response_page_path = "/index.html"
