@@ -23,17 +23,17 @@ jobs:
         id: short_commit_id
         run: |
           echo "SHORT_COMMIT_ID=$(git rev-parse --short=7 HEAD)" >> $GITHUB_ENV
-      - name: set env params for the build
-        id: write_env
-        run: |
-          echo "REACT_APP_COMMIT_ID=${{ env.SHORT_COMMIT_ID }}" >> ./env
-          echo "REACT_APP_ENV=prod" >> ./env
+          echo "SHORT_COMMIT_ID=$(git rev-parse --short=7 HEAD)" >> .env.production
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --pure-lockfiles
-      - run: yarn build
+      - name: Yarn build
+        run: |
+          REACT_APP_COMMIT_ID=${{ env.SHORT_COMMIT_ID }}
+          REACT_APP_ENV=prod
+          yarn build
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -50,5 +50,6 @@ jobs:
         id: Summary
         shell: bash
         run: |
-          echo "Env file content" >> $GITHUB_STEP_SUMMARY
-          cat .env >> $GITHUB_STEP_SUMMARY
+          echo "Version built" >> $GITHUB_STEP_SUMMARY
+          echo ${{ env.SHORT_COMMIT_ID }} >> $GITHUB_STEP_SUMMARY
+          echo .env.production >> $GITHUB_STEP_SUMMARY
