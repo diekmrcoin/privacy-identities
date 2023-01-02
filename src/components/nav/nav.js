@@ -37,9 +37,9 @@ class Nav extends React.Component {
     return this.buttonList.map((button, index) => {
       return (
         <Col key={index}>
-          <Button onClick={button.onClick}>
-            <Link to={button.link}>{button.icon}</Link>
-          </Button>
+          <Link to={button.link} onClick={button.onClick}>
+            <Button>{button.icon}</Button>
+          </Link>
         </Col>
       );
     });
