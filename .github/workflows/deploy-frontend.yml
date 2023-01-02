@@ -46,3 +46,9 @@ jobs:
       - name: Remove old files
         run: |
           aws s3 sync build s3://${{ env.BUCKET_NAME }}/ --delete
+      - name: Summary
+        id: Summary
+        shell: bash
+        run: |
+          echo "Env file content" >> $GITHUB_STEP_SUMMARY
+          cat .env >> $GITHUB_STEP_SUMMARY
