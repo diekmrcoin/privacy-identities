@@ -22,12 +22,12 @@ jobs:
       - name: export short commit id
         id: short_commit_id
         run: |
-          echo "SHORT_COMMIT_ID=$(git rev-parse --short=7 HEAD)" >> $GITHUB_OUTPUT
+          echo "SHORT_COMMIT_ID=$(git rev-parse --short=7 HEAD)" >> $GITHUB_ENV
       - name: set env params for the build
         id: write_env
         run: |
-          echo "version=${{ steps.short_commit_id.outputs.SHORT_COMMIT_ID }}" >> ./env
-          echo "env=prod" >> ./env
+          echo "REACT_APP_COMMIT_ID=${{ $env.SHORT_COMMIT_ID }}" >> ./env
+          echo "REACT_APP_ENV=prod" >> ./env
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
