@@ -35,7 +35,7 @@ jobs:
           REACT_APP_ENV=prod
           yarn build
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           role-to-assume: ${{secrets.ROLE_ARN}}
           role-session-name: diekmrcoin-privacy-tools-deploy
@@ -52,4 +52,4 @@ jobs:
         run: |
           echo "Version built" >> $GITHUB_STEP_SUMMARY
           echo ${{ env.SHORT_COMMIT_ID }} >> $GITHUB_STEP_SUMMARY
-          echo .env.production >> $GITHUB_STEP_SUMMARY
+          cat .env.production >> $GITHUB_STEP_SUMMARY
