@@ -48,4 +48,3 @@ jobs:
         run: |
           echo "Version built" >> $GITHUB_STEP_SUMMARY
           echo ${{ env.SHORT_COMMIT_ID }} >> $GITHUB_STEP_SUMMARY
-          cat .env.production >> $GITHUB_STEP_SUMMARY

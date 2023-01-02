@@ -28,6 +28,8 @@ Ejemplos:
 - [**X**] AWS + Terraform
   - [**X**] S3 almacenamiento estático
   - [**X**] Cloudfront CDN
+  - [**X**] Route53 `privacytools.diekmrcoin.com`
+  - [**X**] ACM cert
 - [**X**] CI/CD
 
 ## TODO:
@@ -38,8 +40,6 @@ Ejemplos:
 - [-] Almacenamiento remoto con conocimiento cero
 - [-] Docker y self-hosted
 - [-] AWS + Terraform
-  - [-] Route53 `privacytools.diekmrcoin.com`
-  - [-] ACM cert
   - [-] Lambda backend
   - [-] API Gateway
   - [-] DynamoDB backend
