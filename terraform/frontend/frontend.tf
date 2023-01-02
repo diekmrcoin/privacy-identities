@@ -36,9 +36,21 @@ resource "aws_cloudfront_cache_policy" "default" {
   }
 }
 
+provider "aws" {
+  alias = "us_east_1"
+  region = "us-east-1"
+  default_tags {
+    tags = {
+      Name       = "diekmrcoin-privacy-tools"
+      deployment = "terraform"
+    }
+  }
+}
+
 module "cloudfront" {
-  source      = "../modules/cloudfront"
-  description = var.name
+  source          = "../modules/cloudfront"
+  description     = var.name
+  acm_certificate = aws_acm_certificate.www
   origins_s3_bucket = [
     {
       id                          = module.bucket.id
@@ -71,4 +83,22 @@ resource "aws_route53_record" "www" {
   type    = "CNAME"
   ttl     = 300
   records = [module.cloudfront.domain_name]
+}
+
+resource "aws_acm_certificate" "www" {
+  domain_name       = "privacytools.diekmrcoin.com"
+  validation_method = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
+  provider = aws.us_east_1
+}
+
+resource "aws_route53_record" "www_validation" {
+  for_each = { for domain in aws_acm_certificate.www.domain_validation_options : domain.domain_name => domain }
+  name     = each.value.resource_record_name
+  type     = each.value.resource_record_type
+  zone_id  = var.route53_zone
+  records  = [each.value.resource_record_value]
+  ttl      = 60
 }
