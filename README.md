@@ -38,6 +38,7 @@ Ejemplos:
 - [-] Exportar identidad
 - [-] Ordenar identidades por nombre y fecha de creación
 - [-] Almacenamiento remoto con conocimiento cero
+- [-] Stripe como plataforma de pago
 - [-] Docker y self-hosted
 - [-] AWS + Terraform
   - [-] Lambda backend
