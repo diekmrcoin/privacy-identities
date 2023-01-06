@@ -44,6 +44,7 @@ Ejemplos:
   - [-] Lambda backend
   - [-] API Gateway
   - [-] DynamoDB backend
+- [-] Pedirle diseños a Stable Diffusion
 
 ### Webapp color palette
 
