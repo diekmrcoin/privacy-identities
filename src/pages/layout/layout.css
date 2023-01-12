@@ -24,6 +24,7 @@
 .home-body {
   max-height: calc(100vh - 15vh - 3em - 1em - 1em);
   overflow-y: scroll;
+  padding-right: 7px;
 }
 
 .about-me-button {

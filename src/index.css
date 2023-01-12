@@ -8,6 +8,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  font-family: "JetBrains Mono" !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -24,4 +28,25 @@ a:hover {
 }
 a:active {
   color: #274472;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #adb5bd #f8f9fa;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #adb5bd;
+  border-radius: 20px;
+  border: 3px solid #f8f9fa;
 }
